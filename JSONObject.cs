@@ -321,12 +321,28 @@ public class JSONObject {
 					bool inProp = false;
 					int depth = 0;
 					while(++offset < str.Length) {
-						if(System.Array.IndexOf(WHITESPACE, str[offset]) > -1)
-							continue;
-						if(str[offset] == '\\') {
+//						if(System.Array.IndexOf(WHITESPACE, str[offset]) > -1)
+//							continue;
+						if(str[offset] == ' ') {
 							offset += 1;
 							continue;
 						}
+						if(str[offset] == '\n') {
+							offset += 1;
+							continue;
+						}
+						if(str[offset] == '\t') {
+							offset += 1;
+							continue;
+						}
+//						if(str[offset] == '\uFEFF'){
+//							offset += 1;
+//							continue;
+//						}
+//						if(str[offset] == '\u0009') {
+//							offset += 1;
+//							continue;
+//						}
 						if(str[offset] == '"') {
 							if(openQuote) {
 								if(!inProp && depth == 0 && type == Type.OBJECT)
